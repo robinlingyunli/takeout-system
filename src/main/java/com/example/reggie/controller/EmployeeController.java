@@ -2,18 +2,18 @@ package com.example.reggie.controller;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.reggie.common.R;
 import com.example.reggie.entity.Employee;
 import com.example.reggie.service.EmployeeService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.DigestUtils;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDateTime;
 
 @Slf4j
 @RestController
@@ -91,4 +91,54 @@ public class EmployeeController {
         return R.success("退出成功");
     }
 
+    @PostMapping
+    public  R<String> save(HttpServletRequest request, @RequestBody Employee employee){
+        log.info("New employee: {}", employee.toString());
+        //设置初始密码123456，需要进行md5加密处理
+        employee.setPassword(DigestUtils.md5DigestAsHex("123456".getBytes()));
+
+        employee.setCreateTime(LocalDateTime.now());
+        employee.setUpdateTime(LocalDateTime.now());
+
+        //获得当前登录用户的id
+        Long empId = (Long) request.getSession().getAttribute("employee");
+
+        employee.setCreateUser(empId);
+        employee.setUpdateUser(empId);
+
+        employeeService.save(employee);
+
+        return R.success("新增员工成功");
+    }
+
+    /**
+     * 员工信息分页查询
+     * @param page
+     * @param pageSize
+     * @param name
+     * @return
+     */
+    // 在Spring MVC框架中，int page, int pageSize, String name 这些参数是从HTTP请求的查询参数中获取的。
+    // 当客户端（例如浏览器或其他HTTP客户端）向服务器发送一个GET请求时，可以在URL中包含查询参数。
+    @GetMapping("/page")
+    public R<Page> page(int page, int pageSize, String name){
+        log.info("page = {},pageSize = {},name = {}" ,page,pageSize,name);
+
+        //构造分页构造器
+        Page pageInfo = new Page(page,pageSize);
+
+        //构造条件构造器
+        //LambdaQueryWrapper 是 MyBatis-Plus 提供的一个条件构造器，用于构造查询条件。
+        //它支持链式调用和 Lambda 表达式，使得构造查询条件的代码更加简洁和类型安全。
+        LambdaQueryWrapper<Employee> queryWrapper = new LambdaQueryWrapper();
+        //添加过滤条件
+        queryWrapper.like(StringUtils.isNotEmpty(name),Employee::getName,name);
+        //添加排序条件
+        queryWrapper.orderByDesc(Employee::getUpdateTime);
+
+        //执行查询
+        employeeService.page(pageInfo,queryWrapper);
+
+        return R.success(pageInfo);
+    }
 }
