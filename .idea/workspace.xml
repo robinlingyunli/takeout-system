@@ -7,8 +7,8 @@
     <list default="true" id="a6a4bd90-16d7-4ddd-a821-52a23adf99bb" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/reggie/controller/DishController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/reggie/controller/DishController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/reggie/service/DishService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/reggie/service/DishService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/reggie/service/impl/DishServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/reggie/service/impl/DishServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/reggie/service/SetmealService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/reggie/service/SetmealService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/reggie/service/impl/SetmealServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/reggie/service/impl/SetmealServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -132,6 +132,13 @@
       <workItem from="1717101771918" duration="1274000" />
       <workItem from="1717103131922" duration="1868000" />
       <workItem from="1717195424352" duration="4575000" />
+      <workItem from="1717459649119" duration="107000" />
+      <workItem from="1719439289466" duration="623000" />
+      <workItem from="1720109736261" duration="732000" />
+      <workItem from="1720110523909" duration="3000" />
+      <workItem from="1720110589077" duration="1381000" />
+      <workItem from="1720304137959" duration="5582000" />
+      <workItem from="1720545627272" duration="2243000" />
     </task>
     <servers />
   </component>
